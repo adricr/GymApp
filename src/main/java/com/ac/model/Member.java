@@ -1,10 +1,23 @@
 package com.ac.model;
 
+import com.ac.helper.CSVFileOperations;
+
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Represents a member of the Gym
  */
 public class Member extends Person {
     private static int memberNextId;
+
+    static {
+        try {
+            memberNextId = CSVFileOperations.getLastIdFromCSV(new File("members.csv"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private final String memberId;
     private Membership membership;
 
