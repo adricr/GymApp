@@ -7,6 +7,8 @@ import java.util.UUID;
  * Represents a membership
  */
 public abstract class Membership {
+
+
     /**
      * Enumerates the types of memberships
      */
@@ -18,13 +20,15 @@ public abstract class Membership {
     protected MembershipType membershipType;
     protected LocalDate createdAt;
 
-    public Membership(int annualRate, MembershipType membershipType) {
+    public Membership() {
         this.membershipId = generateMembershipId();
-        this.annualRate = annualRate;
-        this.membershipType = membershipType;
         this.createdAt = LocalDate.now();
     }
 
+    public Membership(String membershipId, LocalDate createdAt) {
+        this.membershipId = membershipId;
+        this.createdAt = createdAt;
+    }
     //Methods
     /**
      * Generates a random membership Id

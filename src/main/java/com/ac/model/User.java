@@ -21,7 +21,19 @@ public class User {
     private String password;
 
     public User(String username, String password) {
+        if (userNextId>=0){
         this.userId = String.format("%07d", userNextId++);
+        this.username = username;
+        this.password = password;}
+        else {
+            this.userId = "0";
+            this.username = username;
+            this.password = password;
+        }
+    }
+
+    public User(String userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
     }
@@ -48,17 +60,13 @@ public class User {
         this.password = password;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     //Methods
 
-    /**
-     * Validates if username and password is matching
-     * @param username The user to validate
-     * @param password The password to validate
-     * @return True if both user and password are matching
-     */
-    public boolean authenticate(String username,String password){
-        return this.username.equals(username) && this.password.equals(password);
-    }
+
 
     @Override
     public String toString() {

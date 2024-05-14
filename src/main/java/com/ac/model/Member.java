@@ -18,7 +18,7 @@ public class Member extends Person {
             throw new RuntimeException(e);
         }
     }
-    private final String memberId;
+    private String memberId;
     private Membership membership;
 
 
@@ -37,10 +37,17 @@ public class Member extends Person {
         this.membership = membership;
     }
 
+    public Member(String id,String firstName, String lastName, String address, String city, String postcode, Membership membership) {
+        super(firstName, lastName, address, city, postcode);
+        this.memberId = id;
+        this.membership = membership;
+    }
+
     // Getters
     public String getMemberId() {
         return memberId;
     }
+
 
     public Membership getMembership() {
         return membership;
@@ -50,6 +57,11 @@ public class Member extends Person {
     public void setMembership(Membership membership) {
         this.membership = membership;
     }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
     //Methods
 
 
@@ -57,4 +69,6 @@ public class Member extends Person {
     public String toString() {
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s", memberId, membership.getMembershipId(), firstName, lastName, address, city, postcode, membership.getMembershipType(), membership.getAnnualRate(), membership.getCreatedAt() );
     }
+
+
 }
