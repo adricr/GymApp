@@ -3,13 +3,13 @@ package com.ac.controller;
 import com.ac.helper.CSVFileOperations;
 import com.ac.model.User;
 import com.ac.view.index.Index;
+import com.ac.view.user.Dashboard;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class UserController {
     private final File userFile = new File("users.csv");
-
     /**
      * Constructor
      */
@@ -18,11 +18,27 @@ public class UserController {
 
     //Methods
 
+
     /**
-     * Call view for log-in
+     * Validates if username and password is in CSV
+     * @param username The user to validate
+     * @param password The password to validate
+     * @return True if both user and password are matching
      */
-    public void create(){
-        Index.main();
+    public boolean authenticateUser(String username,String password) {
+        boolean isOk = false;
+        ArrayList<User> userArrayList = new ArrayList<User>();
+        try {
+            userArrayList.addAll(getAllUsersFromCSV());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (User user : userArrayList) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                isOk = true;
+            }
+        }
+        return isOk;
     }
 
     /**
@@ -105,8 +121,9 @@ public class UserController {
      * This method saves an entered user to the users.csv file
      * @param user the user to enter
      */
-    public void saveUserToFile(User user) throws IOException {
-        if(!userFile.exists()){
+    public void store(User user) throws IOException {
+        if(user.getUserId().equals(String.format("%07d",-1))){
+            user.setUserId(String.format("%07d",1));
             userFile.createNewFile();
         }
         try(PrintWriter writer = new PrintWriter(new FileWriter(userFile,true))){
@@ -123,7 +140,7 @@ public class UserController {
     public void saveUsersToFile(ArrayList<User> userArrayList){
         userArrayList.forEach(user -> {
             try {
-                saveUserToFile(user);
+                store(user);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

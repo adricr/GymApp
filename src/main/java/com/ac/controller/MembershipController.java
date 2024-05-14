@@ -1,2 +1,4 @@
-package com.ac.controller;public class MembershipController {
+package com.ac.controller;
+
+public class MembershipController {
 }
