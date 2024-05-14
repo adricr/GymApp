@@ -34,7 +34,9 @@ public class CSVFileOperations {
             int lastId = 0;
             while((line = reader.readLine()) != null){
                 String [] parts = line.split(",");
-                lastId = Integer.parseInt((parts[0]));
+                if (!line.equals("")) {
+                    lastId = Integer.parseInt((parts[0]));
+                }
             }
             return lastId + 1; //return last id plus one
         }catch (IOException e){
@@ -43,5 +45,6 @@ public class CSVFileOperations {
         }
 
     }
+
 
 }
