@@ -18,6 +18,8 @@ public abstract class Membership {
     protected String membershipId;
     protected int annualRate;
     protected MembershipType membershipType;
+
+    protected static int joiningFee = 8;
     protected LocalDate createdAt;
 
     public Membership() {
@@ -63,17 +65,8 @@ public abstract class Membership {
         return createdAt;
     }
 
-    //Setters
-
-    public void setMembershipId(String membershipId) {
-        this.membershipId = membershipId;
+    public static int getJoiningFee() {
+        return joiningFee;
     }
 
-    public void setAnnualRate(int annualRate) {
-        this.annualRate = annualRate;
-    }
-
-    public void setMembershipType(MembershipType membershipType) {
-        this.membershipType = membershipType;
-    }
 }

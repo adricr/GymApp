@@ -28,7 +28,7 @@ public class Receipt {
     public static void main(JFrame frame, Member member) {
         Receipt receipt = new Receipt();
         String template;
-        int joiningFee = 8;
+        int joiningFee = member.getMembership().getJoiningFee();
         Membership membership = member.getMembership();
         template =
                 "Statement for "+String.format("%d",membership.getCreatedAt().getYear())+" for "+member.getFirstName()+" "+member.getLastName()+" - New "+membership.getMembershipType()+" Membership\n"+
