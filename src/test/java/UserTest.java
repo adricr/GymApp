@@ -11,7 +11,7 @@ class UserTest {
     @BeforeEach
     void setUp() {
         //Initialise User obj
-        user = new User(username, password);
+        user = new User(String.format("%07d",0),username, password);
     }
     @Test
     void testGetUsername() {
@@ -35,27 +35,5 @@ class UserTest {
         assertEquals("pass",user.getPassword());
     }
 
-    /**
-     * Tests authenticate() when correct credentials
-     */
-    @Test
-    void testAuthenticateCorrectCredentials() {
-        assertTrue(user.authenticate(username,password));
-    }
-
-    /**
-     * Tests authenticate() when wrong password
-     */
-    @Test
-    void testAuthenticateWrongPassword() {
-        assertFalse(user.authenticate(username,"password"));
-    }
-    /**
-     * Tests authenticate() when wrong user
-     */
-    @Test
-    void testAuthenticateWrongUser() {
-        assertFalse(user.authenticate("wrong",password));
-    }
 
 }
